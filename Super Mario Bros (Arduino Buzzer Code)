@@ -1,0 +1,33 @@
+int buzzerPin = 9; // Change this to the pin connected to your buzzer
+
+// Define the notes of the Super Mario Bros theme song
+int melody[] = { // Note frequencies in Hz
+  262, 262, 0, 262, 0, 209, 262, 0, 311, 0, 0, 0, 156, 0, 0, 0,
+  262, 415, 415, 440, 415, 0, 370, 0, 311, 0, 0, 0, 466, 0, 0, 0,
+  370, 0, 311, 0, 0, 0, 277, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  262, 0, 0, 0, 262, 0, 0, 0, 262, 0, 209, 0, 0, 0, 156, 0
+};
+
+// Define the duration of each note in milliseconds
+int noteDurations[] = {
+  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 300,
+  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 300,
+  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 300,
+  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 300
+};
+
+void setup() {
+  pinMode(buzzerPin, OUTPUT);
+}
+
+void loop() {
+  for (int i = 0; i < sizeof(melody)/sizeof(melody[0]); i++) {
+    if (melody[i] == 0) {
+      delay(noteDurations[i]);
+    } else {
+      tone(buzzerPin, melody[i], noteDurations[i]);
+    }
+    delay(noteDurations[i] * 1.30); // Add a small delay between notes
+    noTone(buzzerPin);
+  }
+}
